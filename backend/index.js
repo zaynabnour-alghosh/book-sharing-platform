@@ -1,8 +1,8 @@
 const express = require("express")
 const app =express();
-require("dotenv").config()
-const mongoDb = require("./configs/mongodb.connection");
 
+const mongoDb = require("./configs/mongodb.connection");
+require("dotenv").config()
 app.use(express.json())
 
 const authRouter = require("./routes/auth.routes")
