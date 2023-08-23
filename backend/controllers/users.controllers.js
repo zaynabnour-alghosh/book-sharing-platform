@@ -124,10 +124,29 @@ const viewFollowingFeed = async (req,res)=> {
     }
 }
 
+const likeBook = async (req,res)=> {
+    const userId = req.user._id;
+    const { bookId } = req.body;
+    try{
+        const book = await Book.findById(bookId);
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found' });
+          }
+        book.likes.push(userId);
+        await book.save();
+        res.json({likesCount: book.likes.length });
+    }catch(error){
+        console.error('An error has occured:', error);
+        res.status(500).json({message:"An error has occured while liking the feed"});
+    }
+}
+
+
 module.exports = {
     postBook,
     searchBook,
     followBookLover,
     unfollowBookLover,
-    viewFollowingFeed
+    viewFollowingFeed,
+    likeBook
   };
