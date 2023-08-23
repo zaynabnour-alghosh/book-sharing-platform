@@ -127,20 +127,47 @@ const viewFollowingFeed = async (req,res)=> {
 const likeBook = async (req,res)=> {
     const userId = req.user._id;
     const { bookId } = req.body;
-    try{
+    try {
         const book = await Book.findById(bookId);
         if (!book) {
-            return res.status(404).json({ message: 'Book not found' });
-          }
+        return res.status(404).json({ message: 'Book not found' });
+        }
+
+        const alreadyLiked = book.likes.includes(userId);
+
+        if (!alreadyLiked) {
         book.likes.push(userId);
         await book.save();
-        res.json({likesCount: book.likes.length });
-    }catch(error){
-        console.error('An error has occured:', error);
-        res.status(500).json({message:"An error has occured while liking the feed"});
+        }
+
+        res.json({ likesCount: book.likes.length });
+    } catch (error) {
+        console.error('An error has occurred:', error);
+        res.status(500).json({ message: 'An error has occurred while liking the book', error: error.message });
     }
 }
 
+const unlikeBook = async (req,res)=> {
+    const userId = req.user._id;
+    const { bookId } = req.body;
+    try {
+      const book = await Book.findById(bookId);
+      if (!book) {
+        return res.status(404).json({ message: 'Book not found' });
+      }
+        const alreadyLiked = book.likes.includes(userId);
+  
+      if (alreadyLiked) {
+        book.likes = book.likes.filter(likedUserId => likedUserId.toString() !== userId.toString());
+        await book.save();
+      }
+  
+      res.json({ message: 'Successful unlike', likesCount: book.likes.length });
+    } catch (error) {
+      console.error('An error has occurred:', error);
+      res.status(500).json({ message: 'An error has occurred while unliking the book', error: error.message });
+    }
+}
 
 module.exports = {
     postBook,
@@ -148,5 +175,6 @@ module.exports = {
     followBookLover,
     unfollowBookLover,
     viewFollowingFeed,
-    likeBook
+    likeBook,
+    unlikeBook
   };

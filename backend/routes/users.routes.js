@@ -8,6 +8,6 @@ router.post("/follow",authMiddleware, userController.followBookLover)
 router.post("/unfollow",authMiddleware, userController.unfollowBookLover)
 router.post("/view-following-feed",authMiddleware, userController.viewFollowingFeed)
 router.post("/like",authMiddleware, userController.likeBook)
-// router.post("/unlike", userController.unlikeBook)
+router.post("/unlike", authMiddleware,userController.unlikeBook)
 
 module.exports = router;
