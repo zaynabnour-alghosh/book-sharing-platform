@@ -8,7 +8,10 @@ const usersSchema=new mongoose.Schema({
         type:String,
         unique:true,
     },
-    password:String  
+    password:String ,
+    following: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    ],
 })
 
 const model=mongoose.model("User",usersSchema)
