@@ -10,7 +10,17 @@ const usersSchema=new mongoose.Schema({
     },
     password:String ,
     following: [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+        {
+          user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+          username: String,
+        
+        },
+      ],
+    followers: [
+    {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        username: String,
+    },
     ],
 })
 

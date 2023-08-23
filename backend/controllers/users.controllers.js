@@ -78,8 +78,23 @@ const searchBook = async (req,res)=> {
         res.status(500).json({ message: 'Error searching for books', error: error.message });
     }
 }
+const followBookLover = async (req,res)=> {
+    const user = await User.findById(req.user._id);
+    try{
+        const {userToFollowId}=req.body;
+        const userToFollow=await User.findById(userToFollowId);
+        user.following.push({user:userToFollowId,username:userToFollow.username});
+        await user.save();
+        userToFollow.followers.push({user: req.user._id ,username: user.username});
+        await userToFollow.save();
+        res.json({ message:"successfull follow"});
+    }catch(error){
+        res.status(500).json({message:"An error has occured while following user"});
+    }
+}   
 
 module.exports = {
     postBook,
-    searchBook
+    searchBook,
+    followBookLover
   };
