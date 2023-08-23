@@ -2,6 +2,7 @@ const User = require("../models/users.model")
 const Genre=require("../models/genres.model")
 const Keyword=require("../models/keywords.model")
 const Book=require("../models/books.model")
+const { isValidObjectId } = require('mongoose');
 
 const postBook = async (req,res)=> {
     const user = await User.findById(req.user._id);
@@ -45,6 +46,40 @@ const postBook = async (req,res)=> {
     }
 };
 
+
+
+const searchBook = async (req,res)=> {
+    try {
+        const { filter } = req.body;
+        const regexFilter = new RegExp(filter, 'i');
+        let searchBooks;
+        let searchType;
+        const genre = await Genre.findOne({ name: regexFilter });
+        if (genre) {
+            searchBooks = await Book.find({ genre: genre._id }).populate('genre keywords');
+            searchType = 'genre';
+        }
+        else {
+            const keywords = await Keyword.find({ name: regexFilter });
+            if (keywords && keywords.length > 0) {
+                const keywordIds = keywords.map(keyword => keyword._id);
+                searchBooks = await Book.find({ keywords: { $in: keywordIds } }).populate('genre keywords');
+                searchType = 'keyword';
+            } 
+            else{
+            searchBooks = await Book.find({ author: regexFilter }).populate('genre keywords');
+            searchType = 'author';
+            }
+        }
+        res.json({ filter:searchType, books: searchBooks });
+    
+    } catch (error) {
+        console.error('An error has occured while searching for books:', error);
+        res.status(500).json({ message: 'Error searching for books', error: error.message });
+    }
+}
+
 module.exports = {
     postBook,
+    searchBook
   };

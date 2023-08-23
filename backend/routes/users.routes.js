@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require("../controllers/users.controllers");
 const authMiddleware=require("../middlewares/auth.middleware");
 router.post("/post-book",  authMiddleware,userController.postBook)
-// router.post("/search-book", userController.searchBook)
+router.post("/search-book", userController.searchBook)
 // router.post("/follow", userController.followBookLover)
 // router.post("/unfollow", userController.unfollowBookLover)
 // router.post("/view-following-feed", userController.viewFollowingFeed)
