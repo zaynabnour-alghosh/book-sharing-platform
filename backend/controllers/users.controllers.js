@@ -93,8 +93,24 @@ const followBookLover = async (req,res)=> {
     }
 }   
 
+const unfollowBookLover = async (req,res)=> {
+    const user = await User.findById(req.user._id);
+    try{
+        const {userToUnfollowId}=req.body;
+        const userToUnfollow=await User.findById(userToUnfollowId);
+        user.following=user.following.filter((followedUser)=>followedUser.user.toString() !== userToUnfollowId);
+        await user.save();
+        userToUnfollow.followers=userToUnfollow.followers.filter((follower)=>follower.user.toString() !== req.user._id);
+        await userToUnfollow.save();
+        res.json({ message:"successfull unfollow"});
+    }catch(error){
+        res.status(500).json({message:"An error has occured while unfollowing user"});
+    }
+}   
+
 module.exports = {
     postBook,
     searchBook,
-    followBookLover
+    followBookLover,
+    unfollowBookLover
   };
