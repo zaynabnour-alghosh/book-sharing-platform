@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const keywordSchema = new mongoose.Schema({
+const keywordsSchema = new mongoose.Schema({
   name: { 
     type: String, 
     unique: true,
     },
 });
 
-module.exports = mongoose.model('Keyword', keywordSchema);
+module.exports = mongoose.model('Keyword', keywordsSchema);
