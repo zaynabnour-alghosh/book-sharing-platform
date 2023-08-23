@@ -108,9 +108,26 @@ const unfollowBookLover = async (req,res)=> {
     }
 }   
 
+const viewFollowingFeed = async (req,res)=> {
+    const user = await User.findById(req.user._id);
+    try{
+        const followingUsersIds=user.following.map((followedUser)=>followedUser.user);
+        const followingBookFeed= await Book.find({user:{$in:followingUsersIds}})
+            .populate('user')
+            .populate('genre keywords')
+            .sort('-createdAt');
+        res.json({ feed:followingBookFeed});
+    }catch(error){
+        console.error('An error has occured:', error);
+
+        res.status(500).json({message:"An error has occured while viewing followings' feed"});
+    }
+}
+
 module.exports = {
     postBook,
     searchBook,
     followBookLover,
-    unfollowBookLover
+    unfollowBookLover,
+    viewFollowingFeed
   };

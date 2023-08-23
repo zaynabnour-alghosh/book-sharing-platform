@@ -25,6 +25,6 @@ const booksSchema = new mongoose.Schema({
     keywords: [
         { type: mongoose.Schema.Types.ObjectId, ref: 'Keyword' }
     ],
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model('Book', booksSchema);
