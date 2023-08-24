@@ -1,0 +1,50 @@
+.BookCard-container{
+    width:500px;
+    display:flex;
+    margin:50px;
+    box-shadow:rgba(0, 0, 0, 0.1) 0px 4px 15px 0px;
+    border-radius: 10px;
+    box-sizing:border-box;       
+}
+.BookCard-link{
+    width:100%;
+}
+.BookCard-content{
+    display: flex;
+    flex-direction: row;
+    gap:50px;
+}
+.BookCard-image{
+    width:100%;
+    
+}
+.BookCard-image img{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.BookCard-info{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap:25px
+}
+.BookCard-name{
+    margin-top: 5px;
+    font-size: 24px;
+}
+.BookCard-author{
+    margin-top: -15px;
+    font-size: 14px;
+}
+.BookCard-genre{
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.BookCard-description{
+    margin-top: 10px;
+}
+.BookCard-review{
+    font-weight: 600;
+
+}
