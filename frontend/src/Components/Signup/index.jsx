@@ -57,10 +57,11 @@ const Signup=({onToggle})=>{
     //     }
     // }
     return (
-        <div className="signup page container flex center">
+        <div className="signup page  flex center">
             <div className="signup-container flex column center">
                 <h1>Create your account</h1>        
                 <div className="signup-row flex column">
+                    <label htmlFor="username">Username</label>
                     <input 
                         type="username" 
                         placeholder="Username" 
@@ -68,6 +69,7 @@ const Signup=({onToggle})=>{
 						// value={username}
 						// onChange={handleChange}
                         />
+                    <label htmlFor="email">Email</label>
                     <input 
                         type="email" 
                         placeholder="Email Address" 
@@ -75,6 +77,7 @@ const Signup=({onToggle})=>{
 						// value={email}
 						// onChange={handleChange}
                         />
+                    <label htmlFor="password">Password</label>
                     <input 
                         type="password" 
                         placeholder="Password" 

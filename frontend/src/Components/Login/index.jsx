@@ -58,7 +58,7 @@ const Login=({onToggle})=>{
     //     }
     // }
     return (
-        <div className="login page container flex center">
+        <div className="login page  flex center">
             <div className="login-container flex column center">
                
                 <h1>Log in to BookNook</h1>        

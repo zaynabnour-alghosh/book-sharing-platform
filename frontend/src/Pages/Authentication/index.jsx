@@ -5,7 +5,7 @@ import Signup from "../../Components/Signup";
 const Authentication=()=>{
     const[login,setLogin]=useState(true);
     return(
-        <div className="center  auth flex page-auth">
+        <div className="center pager auth flex page-auth">
             {login? 
             (<Login onToggle={()=>setLogin(false)}/>)
             :
