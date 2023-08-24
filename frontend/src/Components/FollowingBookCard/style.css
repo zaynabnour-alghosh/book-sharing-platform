@@ -1,4 +1,4 @@
-.BookCard-container{
+.FollowingCard-container{
     width:500px;
     display:flex;
     margin:50px;
@@ -6,66 +6,58 @@
     border-radius: 10px;
     box-sizing:border-box;       
 }
-.BookCard-container:hover{
-    transform: scale(1.05, 1.05);
-}
-.BookCard-link{
+.FollowingCard-link{
     width:100%;
 }
-.BookCard-content{
+.FollowingCard-content{
     display: flex;
     flex-direction: row;
     gap:50px;
-    border-top: 2px solid  rgb(115, 115, 189);
-
+    border-top: 2px solid rgb(67, 173, 122);
 }
-.BookCard-image{
+.FollowingCard-image{
     width:100%;
     
 }
-
-.BookCard-info{
+.FollowingCard-image img{
+  
+   
+}
+.FollowingCard-info{
     display:flex;
     flex-direction: column;
     justify-content: flex-start;
     gap:25px
 }
-.BookCard-name{
+.FollowingCard-name{
     margin-top: 5px;
     font-size: 24px;
 }
-.BookCard-author{
+.FollowingCard-author{
     margin-top: -15px;
     font-size: 14px;
 }
-.BookCard-genre{
+.FollowingCard-genre{
     margin-top: 20px;
     font-size: 16px;
 }
 
-.BookCard-description{
+.FollowingCard-description{
     margin-top: 10px;
 }
-.BookCard-review{
+.FollowingCard-review{
     font-weight: 600;
 
 }
-.btnFollow{
-    background-color: rgb(115, 115, 189);
-    padding:5px;
-    font-size: 14px;;
-    border-radius: 8px;
-    margin-left: 20px;
-    color:white;
-}
-.btnFollow:hover{
-    background-color: black;
-
+.owner{
+    padding:10px;
+    display: flex;
+    justify-content: space-between;
 }
 .like-icon{
     color:red;
 }
-.likes{
+.like{
     padding:10px;
-    border-top: 2px solid  rgb(115, 115, 189);
+    border-top: 2px solid rgb(67, 173, 122);
 }

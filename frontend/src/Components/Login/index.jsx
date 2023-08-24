@@ -1,10 +1,14 @@
 import "./style.css";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 // import { sendRequest } from "../../config/request";
 // import { useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
 const Login=({onToggle})=>{
+	const navigate = useNavigate();
+
 	// const navigate = useNavigate();
     // const loginButton=useRef();
     // const [credentials,setCredentials]=useState({
@@ -80,7 +84,7 @@ const Login=({onToggle})=>{
 						// value={password}
 						// onChange={handleChange}
                         />
-                    <button  className="btn-login">
+                    <button  className="btn-login" onClick={()=>{navigate("/books")}}>
                         {/* className="btn-login"
                         ref={loginButton}
 						 onClick={handleLogin}> */}

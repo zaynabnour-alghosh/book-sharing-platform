@@ -16,21 +16,21 @@ const SideBar = ({ items, selected = items[0] }) => {
 
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		if (localStorage.getItem("token") == null) {
-			navigate("/");
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (localStorage.getItem("token") == null) {
+	// 		navigate("/");
+	// 	}
+	// }, []);
 
-	const logoutButton = useRef();
+	// const logoutButton = useRef();
 
-	const handleLogout = () => {
-		logoutButton.current.textContent = "Logging Out...";
-		setTimeout(() => {
-			localStorage.removeItem("token");
-			navigate("/");
-		}, 1000);
-	};
+	// const handleLogout = () => {
+	// 	logoutButton.current.textContent = "Logging Out...";
+	// 	setTimeout(() => {
+	// 		localStorage.removeItem("token");
+	// 		navigate("/");
+	// 	}, 1000);
+	// };
 
 	return (
 		<div className="sidebar">
@@ -49,8 +49,8 @@ const SideBar = ({ items, selected = items[0] }) => {
 			</div>
 			<div
 				className="logout"
-				onClick={() => handleLogout()}
-				ref={logoutButton}
+				// onClick={() => handleLogout()}
+				// ref={logoutButton}
 			>
 				<BiLogOut />
 				Logout

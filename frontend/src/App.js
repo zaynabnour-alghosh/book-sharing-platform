@@ -7,6 +7,7 @@ import BookCard from './Components/BookCard';
 import BookContainer from './Components/BooksContainer';
 import Home from './Pages/Books';
 import NewBook from './Pages/NewBook';
+import Feed from './Pages/Feed';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<Authentication />} />
       <Route path="/books" element={<Home/>} />
       <Route path="/new" element={<NewBook/>} />
+      <Route path="/feed" element={<Feed/>} />
 
       {/* <Route path="/home" element={<Home/>} />
       <Route path="/search" element={<Search />} />

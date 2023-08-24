@@ -1,0 +1,22 @@
+.followings-books-container{
+    
+    height: 100%;
+    overflow-y: scroll;
+    
+   
+}
+.feed-container{
+    flex-direction: column;
+}
+.btnFollowing{
+    background-color: rgb(64, 163, 100);
+    padding:5px;
+    font-size: 14px;;
+    border-radius: 8px;
+    margin-left: 20px;
+    color:white;
+}
+.btnFollowing:hover{
+    background-color: black;
+
+}
