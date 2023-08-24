@@ -1,0 +1,9 @@
+.page{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../images/book-nook.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
