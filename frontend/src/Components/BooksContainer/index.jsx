@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { sendRequest } from "../../config/request";
 const BookContainer=()=>{
     const [bookCards, setBookCards] = useState([]);
+    const [search, setSearch] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [filter,setFilter]=useState(' ')
     useEffect(() => {
         const fetchBookCards = async () => {
         try {
@@ -18,7 +21,22 @@ const BookContainer=()=>{
       }
     };
     fetchBookCards();
-  }, []); 
+    }, []); 
+    const handleSearch = async() => {
+        try {
+            const filteredResults=await sendRequest({
+            method:"POST",
+            route:"/user/search-book"});
+            console.log(filteredResults)
+            setFilter(filteredResults.filter)
+            setSearchResults(filteredResults);
+            setSearch(' ');
+            
+
+        } catch (error) {
+            console.error("Error fetching book cards:", error);
+      }
+      };
 
     return(
         <div className="flex row content">
@@ -41,7 +59,6 @@ const BookContainer=()=>{
                                 likes={bookCard.likes.length}
                                 username={bookCard.user.username}
                                 usernameId={bookCard.user._id}
-                                
                                 />
                     ))}
                 </div>
@@ -51,21 +68,21 @@ const BookContainer=()=>{
                     <div className="search primary-bg flex row">
                         <input 
                             type="text" 
-                            placeholder='Seach Books...' 
+                            placeholder='Search by author,genre,keywords...' 
                             name="search" 
-                            // value={search}
-                            // onChange={(e) => setSearch(e.target.value)}
-                            // onKeyDown={(e) => {
-                            //     if (e.key === 'Enter') {
-                            //       handleSearch(e);
-                            //     }
-                            //   }}
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  handleSearch(e);
+                                }
+                              }}
                             />
                         <AiOutlineSearch  size={50}/>
                     </div>                        
                 </div>
                 <div className="search-results">
-                    <h2>Here goes the search results</h2>
+                    <h2>Filter By:{filter}</h2>
                 </div>
             </div>
         </div>
