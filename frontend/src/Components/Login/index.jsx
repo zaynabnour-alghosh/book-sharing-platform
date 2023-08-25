@@ -2,8 +2,8 @@ import "./style.css";
 import { sendRequest } from "../../config/request";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const Login=({onToggle,user,setUser})=>{
+import axios from "axios";
+const Login=({onToggle})=>{
 	const navigate = useNavigate();
     const loginButton=useRef();
     const [credentials,setCredentials]=useState({
@@ -32,24 +32,21 @@ const Login=({onToggle,user,setUser})=>{
                 body:credentials,
             });
 
-            if(response.success===true){
-                console.log(response.data)
+             if(response){
+                console.log(response)
                 loginButton.current.disabled = false;
 				loginButton.current.textContent = "Success";
                 localStorage.setItem(
 					"token",
-					response.data.token
+					response.token
 				);
                 setTimeout(() => {
 					loginButton.current.textContent = "Logging In...";
-                    const username=response.data.username;
-                    console.log(username);
-                    setUser(username);
                 }, 1000);
                 setTimeout(() => {navigate(`/books`)},1000);
             }
         }catch(error){
-            console.log(error);
+            console.log(error.response.data);
 			loginButton.current.disabled = false;
 			loginButton.current.textContent = "Failed";
 			setTimeout(() => {

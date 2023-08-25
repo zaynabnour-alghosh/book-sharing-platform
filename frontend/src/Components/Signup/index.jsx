@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { sendRequest } from "../../config/request";
 
-const Signup=({onToggle,user,setUser })=>{
+const Signup=({onToggle})=>{
     const navigate = useNavigate();
     const signupButton=useRef();
     const [data,setData]=useState({
@@ -34,13 +34,9 @@ const Signup=({onToggle,user,setUser })=>{
             });
 
             if(response.message==="user created successfully"){
+                console.log(response.message)
                 signupButton.current.disabled = false;
 				signupButton.current.textContent = "Success";
-                setTimeout(() => {
-                    const username=response.data.username;
-                    console.log(username);
-                    setUser(username);
-                }, 1000);
                 setTimeout(() => {
                     navigate("/");
                     onToggle(); 
@@ -65,29 +61,29 @@ const Signup=({onToggle,user,setUser })=>{
                         type="username" 
                         placeholder="Username" 
                         name="username"
-						// value={username}
-						// onChange={handleChange}
+						value={username}
+						onChange={handleChange}
                         />
                     <label htmlFor="email">Email</label>
                     <input 
                         type="email" 
                         placeholder="Email Address" 
                         name="email"
-						// value={email}
-						// onChange={handleChange}
+						value={email}
+						onChange={handleChange}
                         />
                     <label htmlFor="password">Password</label>
                     <input 
                         type="password" 
                         placeholder="Password" 
                         name="password"
-						// value={password}
-						// onChange={handleChange}
+						value={password}
+						onChange={handleChange}
                         />
                     <button 
                         className="btn-signup"
-                        // ref={signupButton}
-						// onClick={handleSignup}
+                        ref={signupButton}
+						onClick={handleSignup}
                         >Sign up</button>
                     <div className="option-login">
                         Already have an account?<span onClick={() => onToggle()}>Log in</span>
