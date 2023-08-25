@@ -8,6 +8,21 @@ const BookContainer=()=>{
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [filter,setFilter]=useState(' ')
+
+    const handleInputChange = (e) => {
+        setSearch(e.target.value);
+        
+        if (e.target.value.toLowerCase().includes('author')) {
+          setFilter('Author');
+        } else if (e.target.value.toLowerCase().includes('genre')) {
+          setFilter('Genre');
+        } else if (e.target.value.toLowerCase().includes('keyword')) {
+          setFilter('Keyword');
+        } else {
+          setFilter('All');
+        }
+      };
+
     useEffect(() => {
         const fetchBookCards = async () => {
         try {
@@ -23,15 +38,17 @@ const BookContainer=()=>{
     fetchBookCards();
     }, []); 
     const handleSearch = async() => {
+        const data = new FormData();
+        data.append('filter', search);
         try {
-            const filteredResults=await sendRequest({
+            const response=await sendRequest({
             method:"POST",
-            route:"/user/search-book"});
-            console.log(filteredResults)
-            setFilter(filteredResults.filter)
-            setSearchResults(filteredResults);
+            route:"/user/search-book",
+            body:data});
+            console.log(response)
+            setFilter(response.filter)
+            setSearchResults(response);
             setSearch(' ');
-            
 
         } catch (error) {
             console.error("Error fetching book cards:", error);

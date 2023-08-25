@@ -1,19 +1,45 @@
 import React from "react";
 import "./style.css";
+import { sendRequest } from "../../config/request";
 import { FaHeart,FaRegHeart} from 'react-icons/fa';
+import { useState } from "react";
 
-const BookCard=({id,title,author,pictureUrl,review ,genre,likes,username,usernameId})=>{
-    
+const BookCard=({_id,title,author,pictureUrl,review ,genre,likes,username,usernameId})=>{
+    const [isFollowing, setIsFollowing] = useState(false);
+   const userId=usernameId;
+   console.log(userId)
+   const Follow = async() => {
+    setIsFollowing((prevState) => !prevState);
+        console.log(userId)
+        const data = new FormData();
+        data.append('userToFollowId', userId);
+        try {
+            const response=await sendRequest({
+            method:"POST",
+            route:"/user/follow",
+            body:data,
+            includeHeaders:true
+        });
+            console.log(response)
+
+        } catch (error) {
+            console.error("Error fetching book cards:", error);
+        }
+    };
+
 
   
     
     return(
 <div class="BookCard-container flex">
-    <a class="BookCard-link flex column" href="/books/bookdetails">
+    <div class="BookCard-link flex column" >
         <div className="owner"> 
             <strong>{username}</strong>  
             <span>
-                <button className="btnFollow">Follow</button>
+                <button className={`btnFollow ${isFollowing ? 'following' : ''}`}
+                onClick={Follow}
+        >
+          {isFollowing ? 'Following' : 'Follow'}</button>
             </span>
         </div>
         <div class="BookCard-content flex row">
@@ -44,7 +70,7 @@ const BookCard=({id,title,author,pictureUrl,review ,genre,likes,username,usernam
                 &nbsp; {likes} Likes 
             </span> 
         </div>
-    </a>
+    </div>
 </div>
     );
 }
