@@ -8,12 +8,16 @@ import BookContainer from './Components/BooksContainer';
 import Home from './Pages/Books';
 import NewBook from './Pages/NewBook';
 import Feed from './Pages/Feed';
+import { useState } from 'react';
 
 function App() {
+  const [user, setUser] = useState({
+		username: ""
+	});
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Authentication />} />
+      <Route path="/" element={<Authentication user={user} setUser={setUser} />} />
       <Route path="/books" element={<Home/>} />
       <Route path="/new" element={<NewBook/>} />
       <Route path="/feed" element={<Feed/>} />
