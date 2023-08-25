@@ -1,8 +1,25 @@
 import BookCard from "../BookCard";
 import "./style.css";
-import {AiOutlineSearch,AiOutlineArrowRight} from "react-icons/ai";
-
+import {AiOutlineSearch} from "react-icons/ai";
+import { useEffect, useState } from "react";
+import { sendRequest } from "../../config/request";
 const BookContainer=()=>{
+    const [bookCards, setBookCards] = useState([]);
+    useEffect(() => {
+        const fetchBookCards = async () => {
+        try {
+            const response=await sendRequest({
+                method:"POST",
+                route:"/user/getAll"})
+            setBookCards(response.bookSuggestions);
+            console.log(response.bookSuggestions)
+        } catch (error) {
+            console.error("Error fetching book cards:", error);
+      }
+    };
+    fetchBookCards();
+  }, []); 
+
     return(
         <div className="flex row content">
             <div className="primary-bg flex column">
@@ -12,9 +29,21 @@ const BookContainer=()=>{
                     </h2> 
                 </div>
                 <div className="books-container center flex">
-                    <BookCard />
-                    <BookCard />
-                    <BookCard />
+                    
+                    {bookCards.map((bookCard, index) => (
+                    <BookCard   key={index}
+                                id={bookCard._id}
+                                title={bookCard.title}
+                                genre={bookCard.genre.name}
+                                author={bookCard.author}
+                                pictureUrl={bookCard.pictureUrl}
+                                review={bookCard.review}
+                                likes={bookCard.likes.length}
+                                username={bookCard.user.username}
+                                usernameId={bookCard.user._id}
+                                
+                                />
+                    ))}
                 </div>
             </div>
             <div className="books-search flex column">
@@ -38,13 +67,8 @@ const BookContainer=()=>{
                 <div className="search-results">
                     <h2>Here goes the search results</h2>
                 </div>
-                
-
             </div>
         </div>
-
-        
-        
     );
 }
 export default BookContainer;

@@ -2,12 +2,16 @@ import React from "react";
 import "./style.css";
 import { FaHeart,FaRegHeart} from 'react-icons/fa';
 
-const BookCard=()=>{
+const BookCard=({id,title,author,pictureUrl,review ,genre,likes,username,usernameId})=>{
+    
+
+  
+    
     return(
 <div class="BookCard-container flex">
     <a class="BookCard-link flex column" href="/books/bookdetails">
         <div className="owner"> 
-            <strong>Username</strong>  
+            <strong>{username}</strong>  
             <span>
                 <button className="btnFollow">Follow</button>
             </span>
@@ -18,26 +22,26 @@ const BookCard=()=>{
             </div>
             <div class="BookCard-info flex column">
                 <div class="BookCard-name">
-                    <h3>Name</h3>
+                    <h3>{title}</h3>
                 </div>
                 <p class="BookCard-author">
-                    Auhtor Name 
+                    {author} 
                 </p>
                 <div class="BookCard-genre">
-                    Personal Development
+                    {genre}
                 </div>
                 <p class="BookCard-description">
                     <span class="BookCard-review">
                         Description: 
                     </span>
-                    Ikigai explains how you can live a longer and happier life by having a purpose, eating healthy, and not retiring.
+                    {review}
                 </p>
             </div>
         </div>
         <div className="likes"> 
             <FaHeart className="icon like-icon liked"/>
             <span>
-                &nbsp; 12  Likes 
+                &nbsp; {likes} Likes 
             </span> 
         </div>
     </a>
